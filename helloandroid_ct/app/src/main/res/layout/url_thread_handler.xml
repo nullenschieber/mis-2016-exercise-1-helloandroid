@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ThreadHandler"
+	android:background="#977fbee8">
+
+    <Button android:id="@+id/GetServerData" 
+    	android:text="#### Connect ####"
+    	android:cursorVisible="true"
+    	android:clickable="true"
+		android:layout_width="300dp"
+		android:layout_height="wrap_content"  
+		android:layout_gravity="center_horizontal"
+		android:layout_below="@+id/editText"
+		android:layout_alignLeft="@+id/editText"
+		android:layout_alignStart="@+id/editText"
+		android:background="#f14351f3" />
+
+	<TextView
+		android:layout_width="300dp"
+		android:layout_height="wrap_content"
+		android:text=" Enter URL"
+		android:id="@+id/textView2"
+		android:elegantTextHeight="false"
+		android:textSize="20dp"
+		android:layout_marginTop="37dp"
+		android:editable="false"
+		android:layout_alignParentTop="true"
+		android:layout_centerHorizontal="true"
+		android:textAlignment="center"
+		android:background="#dfd8edfd" />
+
+	<EditText
+		android:layout_width="300dp"
+		android:layout_height="30dp"
+		android:id="@+id/editText"
+		android:autoText="false"
+		android:background="#c7d8ec"
+		android:layout_below="@+id/textView2"
+		android:layout_centerHorizontal="true" />
+
+	<EditText
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:id="@+id/editText2"
+		android:layout_alignLeft="@+id/GetServerData"
+		android:layout_alignStart="@+id/GetServerData"
+		android:layout_alignParentBottom="true"
+		android:layout_alignRight="@+id/GetServerData"
+		android:layout_alignEnd="@+id/GetServerData"
+		android:layout_below="@+id/GetServerData"
+		android:background="#c66075fa" />
+
+</RelativeLayout>
