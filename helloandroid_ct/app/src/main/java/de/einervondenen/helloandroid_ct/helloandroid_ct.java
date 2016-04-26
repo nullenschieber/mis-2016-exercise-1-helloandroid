@@ -1,12 +1,15 @@
 package de.einervondenen.helloandroid_ct;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -30,11 +33,26 @@ public class helloandroid_ct extends Activity {
         final EditText urlText = (EditText) findViewById(R.id.editText);
 
         urlText.setText("http://www.uni-weimar.de/");
+        WebView webView = (WebView) findViewById(R.id.webView);
+        webView.setVisibility(View.GONE);
 
 
         RequestURL.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 int duration = Toast.LENGTH_LONG;
+
+                InputMethodManager imm =
+                        (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
+                TextView text = (TextView)findViewById(R.id.editText2);
+                text.setText("");
+
+                WebView webView = (WebView) findViewById(R.id.webView);
+                webView.setVisibility(View.GONE);
+
+                text.setVisibility(View.GONE);
+
 
                 Toast.makeText(getBaseContext(),
                         "Please wait, requesting URL ...",
@@ -77,18 +95,25 @@ public class helloandroid_ct extends Activity {
                         public void handleMessage(Message msg) {
 
                             String aResponse = msg.getData().getString("message");
+                            WebView webView = (WebView) findViewById(R.id.webView);
                             int duration = Toast.LENGTH_LONG;
 
                             if ((null != aResponse)) {
 
-                                Toast.makeText(getBaseContext(),
-                                        "Server Response: "+aResponse,
-                                        duration).show();
+                                if(aResponse.contains("text/html")) {
+                                    webView.setVisibility(View.VISIBLE);
+                                    webView.loadUrl(RequestURL.toString());
+
+                                }
+                                else {
+                                        Toast.makeText(getBaseContext(),
+                                                "Server Response: " + aResponse,
+                                                duration).show();
 
 
-
-                                TextView text = (TextView)findViewById(R.id.editText2);
-                                text.setText(aResponse);
+                                        TextView text = (TextView) findViewById(R.id.editText2);
+                                        text.setText(aResponse);
+                                    }
                             }
                             else
                             {
